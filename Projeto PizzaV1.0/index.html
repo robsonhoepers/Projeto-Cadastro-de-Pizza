@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Custo Benefício de Pizzas</title>
+        <style>
+
+        body {
+            background-color: #eeeeee;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .clTitulo {
+            text-align: center;
+        }
+
+        .clFieldset {
+            width: 23%;
+            margin: 0 auto;
+            background-color: #986dfc;
+            font-size: 18px;
+        }
+
+        .clLegenda {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        fieldset Input {
+            width: 95%;
+        }
+
+      
+        .clTitle td {
+            font-weight: bold; 
+            background-color: #cccccc;
+        }
+
+        td {
+            border: 1px solid;
+            padding: 5px 20px 2px 5px;
+            width: fit-content;
+            background-color: white;
+        }
+        .clBotao{
+        
+        font-size: 25px;
+        cursor: pointer;
+        margin: 3px;        
+        border: none;                   
+        }
+        .clInput{
+
+        width:95%;
+        height: 25px;
+        margin: 2px;
+        font-size: 25px;
+        color: black;
+        text-align: left;
+        padding: 5px;
+        }
+     
+
+        </style>
+        </head>
+        <body>
+                <div class="clTitulo">
+                    <h1>Custo Benefício de Pizzas</h1>
+                </div>
+                <div>
+                <fieldset class="clFieldset">
+                    <div class="clLegenda">
+                        <legend>Cadastro de Pizzas</legend>
+                    </div>
+                    <div class="clInput">
+                        <input type="text" id="idNomePizza" 
+                            name="nmNomePizza" 
+                            placeholder="Digite o tamanho da pizza: (ex: grande, broto)">
+                    </div>
+
+                    <div class="clInput">
+                        <input type="number" id="idTamanho" 
+                            name="nmTamanho" min="1" 
+                            placeholder="Tamanho da pizza:(cm)">
+                    </div>
+
+                    <div class="clInput">
+                        <input type="number" id="idPreco" 
+                            name="nmPreco" min="0" 
+                            placeholder="Preço da pizza em Reais (R$):">
+                    </div>
+                    <div class="clOut">
+                        <output id="idOut"></output>
+                    </div>
+                    <div class="clBotao">
+                        <button type="button" id="idBtCadastrar">Cadastrar</button>
+
+                        <button type="button" id="idBtNovoRelatorio">Novo Relatório</button>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div id="idSectionReport">
+
+            </div>
+
+            <script>
+
+                /*Declaração das variáveis que pegam os campos que recebem as informações*/
+                var NomePizza = document.getElementById("idNomePizza");
+                var Tamanho = document.getElementById("idTamanho");
+                var Preco = document.getElementById("idPreco");
+
+                /*Declaração da variável que recebem as mensagem de instrução ao usuário*/
+                var alert = document.getElementById("idOut");
+
+                /*Arrays para armazenar as variavéis do relatório e do contador de index */
+                var listaNome = [];
+                var listaTamanho = [];
+                var listaPreco = [];
+                var contIndex = 0;
+
+                
+
+            </script>
+
+            
+        </body>
+</html>
