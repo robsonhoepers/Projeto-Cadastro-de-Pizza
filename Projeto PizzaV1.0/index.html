@@ -3,12 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>Custo Benefício de Pizzas</title>
         <style>
-
+        
+      
         body {
-            background-color: #eeeeee;
+            background-color: #c2bbbb;
             font-family: Arial, Helvetica, sans-serif;
         }
 
@@ -17,16 +18,40 @@
         }
 
         .clFieldset {
-            width: 23%;
-            margin: 0 auto;
+            width: 40%;
+            margin: auto;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 20px;
+            padding-bottom: 20px;
             background-color: #986dfc;
             font-size: 18px;
+            border-radius: 15px;
+        }
+
+        .clField {
+            width: 40%;
+            margin: auto;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: #986dfc;
+            font-size: 18px;
+            border-radius: 15px;
+            
+            
+        }
+        .clOutput{
+            display: inline-table;
+            margin: auto;
         }
 
         .clLegenda {
             font-size: 20px;
             margin-bottom: 10px;
             font-weight: 600;
+            text-align: center;
         }
 
         fieldset Input {
@@ -34,33 +59,26 @@
         }
 
       
-        .clTitle td {
-            font-weight: bold; 
-            background-color: #cccccc;
-        }
-
-        td {
-            border: 1px solid;
-            padding: 5px 20px 2px 5px;
-            width: fit-content;
-            background-color: white;
-        }
         .clBotao{
         
-        font-size: 25px;
-        cursor: pointer;
-        margin: 3px;        
-        border: none;                   
+            font-size: 25px;
+            cursor: pointer;
+            margin: 3px;        
+            border: none;                   
         }
         .clInput{
 
-        width:95%;
-        height: 25px;
-        margin: 2px;
-        font-size: 25px;
-        color: black;
-        text-align: left;
-        padding: 5px;
+            width:95%;
+            height: 25px;
+            margin: 2px;
+            font-size: 25px;
+            color: black;
+            text-align: left;
+            padding: 5px;
+        }
+
+        .alerta {
+        color: rgb(207, 13, 13);
         }
      
 
@@ -70,7 +88,7 @@
                 <div class="clTitulo">
                     <h1>Custo Benefício de Pizzas</h1>
                 </div>
-                <div>
+            <div>
                 <fieldset class="clFieldset">
                     <div class="clLegenda">
                         <legend>Cadastro de Pizzas</legend>
@@ -88,8 +106,8 @@
                     </div>
 
                     <div class="clInput">
-                        <input type="number" id="idPreco" 
-                            name="nmPreco" min="0" 
+                        <input type="number" id="idValorPizza" 
+                            name="nmValorPizza" min="0" 
                             placeholder="Preço da pizza em Reais (R$):">
                     </div>
                     <div class="clOut">
@@ -98,34 +116,86 @@
                     <div class="clBotao">
                         <button type="button" id="idBtCadastrar">Cadastrar</button>
 
-                        <button type="button" id="idBtNovoRelatorio">Novo Relatório</button>
+                        <button type="button" id="idBtCalcular">Calcular</button>
                     </div>
-                </fieldset>
+                    <div>
+                        <output id="idAlerta"></output>
+                    </div>
+                    
+               
+                 </fieldset>
+
+                 <div>
+                    <fieldset class="clField" id="idResultado">
+                        <div class="clLegenda">
+                            <legend>Resultado de acordo com melhor CB</legend>
+                        </div>
+                        <div class="clResultado">
+                            <div class="clOutput" >
+                                <output id="idSaidaNome" name="nmSaidaNome"></output>
+                            </div>
+                            <div class="clOutput">
+                                <output id="idSaidaTamanho" name="nmSaidaTamanho"></output>  
+                            </div>
+                            <div class="clOutput">
+                                <output id="idSaidaPreco" name="nmSaidaPreco"></output>
+                            </div>
+                            <div class="clOutput">
+                                <output id="idSaidaPrecoCm2" name="nmSaidaPrecoCm2"></output>
+                            </div>
+                            <div class="clOutput">
+                                <output id="idSaidaDiferenca" name="nmSaidaDiferenca"></output>
+                            </div>
+                        </div>
+                    </fieldset>
+                 
+    
+                </div>
             </div>
-
-            <div id="idSectionReport">
-
-            </div>
-
+            
+       
             <script>
 
-                /*Declaração das variáveis que pegam os campos que recebem as informações*/
-                var NomePizza = document.getElementById("idNomePizza");
-                var Tamanho = document.getElementById("idTamanho");
-                var Preco = document.getElementById("idPreco");
+                // Declaracão das variaveis iniciais e variaveis auxiliares
+                var listaNomePizza = []
+                var listaTamanho = []
+                var listaPreco = []
+                var listaAreas = []
+                var listaPrecoCm2 = []
+                var listadiferanca = []
+                var btCadastrar = document.querySelector("#idBtCadastrar")
+                var btCalcular = document.querySelector("#idBtCalcular")
+                var nomePizza
+                var tamanhoPizza
+                var valorPizza
 
-                /*Declaração da variável que recebem as mensagem de instrução ao usuário*/
-                var alert = document.getElementById("idOut");
+                // variaveis de saida dos resultados
+                var saidaNome = document.querySelector("#idSaidaNome")
+                var saidaTamanho = document.querySelector("#idSaidaTamanho")
+                var saidaPreco = document.querySelector("#idSaidaPreco")
+                var saidaPrecoCm2 = document.querySelector("#idSaidaPrecoCm2")
+                var saidaDiferenca = document.querySelector("#idSaidaDiferenca")
+                var saidaAlerta = document.querySelector("#idAlerta")
+               
+                                                   
 
-                /*Arrays para armazenar as variavéis do relatório e do contador de index */
-                var listaNome = [];
-                var listaTamanho = [];
-                var listaPreco = [];
-                var contIndex = 0;
-
-                
-
+                // cadastra nome, tamanho e preço inicial
+                btCadastrar.onclick = function () {
+                    capturarDados()
+                    validarDados()
+                    if (validarDados() == true) {
+                        enviarDados()
+                        limpartela()
+                    }
+                    
+                       
+                    }
+                             
+               
             </script>
+           
+
+            
 
             
         </body>
