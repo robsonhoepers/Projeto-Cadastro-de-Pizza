@@ -182,16 +182,49 @@
                 // cadastra nome, tamanho e preço inicial
                 btCadastrar.onclick = function () {
                     capturarDados()
-                    validarDados()
-                    if (validarDados() == true) {
-                        enviarDados()
+                    validarTela()
+                    if (validarTela() == true) {
+                        cadastarDados()
                         limpartela()
                     }
                     
                        
                     }
                              
-               
+                // executa todos os calculos para gerar o relatorio,
+                btCalcular.onclick = function () {
+                    execCalculoArea()
+                    calcularPrecoPorCm2()
+                    calcularDiferença()
+                    mostrasNaTela()
+                }
+                // valida a tela, verificando se tem algum valor digitado
+                function validarTela() {
+                    if (nomePizza == "" || tamanhoPizza == "" || valorPizza == "") {
+                        saidaAlerta.value = "Preenchimento obrigatório dos campos!!"
+                        saidaAlerta.classList.add("alerta")
+                        return false
+                    }
+                    saidaAlerta.classList.remove("alerta")
+                    return true
+                    }
+                
+                // captura os dados da tela
+                function capturarDados() {
+                    nomePizza = document.querySelector("#idNomePizza").value
+                    tamanhoPizza = document.querySelector("#idTamanho").value
+                    valorPizza = document.querySelector("#idValorPizza").value
+                }
+                // insere dados nas variaveis iniciais
+                function cadastarDados() {
+                    listaNomePizza.push(nomePizza)
+                    listaTamanho.push(tamanhoPizza)
+                    listaPreco.push(valorPizza)
+                    console.table(listaNomePizza)
+                    console.table(listaTamanho)
+                    console.table(listaPreco)
+                }
+              
             </script>
            
 
