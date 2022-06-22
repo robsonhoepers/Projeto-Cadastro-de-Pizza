@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Custo Benefício de Pizzas</title>
+        <title>Custo Benefício de Pizzas Projeto V1.2</title>
         <style>
         
       
@@ -155,25 +155,19 @@
             <script>
 
                 // Declaracão das variaveis iniciais e variaveis auxiliares
-                var listaNomePizza = []
-                var listaTamanho = []
-                var listaPreco = []
-                var listaAreas = []
-                var listaPrecoCm2 = []
-                var listadiferanca = []
-                var arrayCompleto = []
+                var listaPizzas = []
+                //var listaTamanho = []
+                //var listaPreco = []
+                //var listaAreas = []
+               // var listaPrecoCm2 = []
+                //var listadiferanca = []
+                //var arrayCompleto = []
                 var btCadastrar = document.querySelector("#idBtCadastrar")
                 var btCalcular = document.querySelector("#idBtCalcular")
                 var nomePizza
                 var tamanhoPizza
                 var valorPizza
 
-                // variaveis de saida dos resultados
-               // var saidaNome = ""
-               // var saidaTamanho = ""
-               // var saidaPreco = ""
-               // var saidaPrecoCm2 = ""
-                //var saidaDiferenca = ""
                 var saidaAlerta = document.querySelector("#idAlerta")
                
                                                    
@@ -195,7 +189,7 @@
                     execCalculoArea()
                     calcularPrecoPorCm2()
                     calcularDiferença()
-                    mostrasNaTela()
+                    //mostrasNaTela()
                 }
                 // valida a tela, verificando se tem algum valor digitado
                 function validarTela() {
@@ -216,66 +210,61 @@
                 }
                 // insere dados nas variaveis iniciais
                 function cadastarDados() {
-                    listaNomePizza.push(nomePizza)
-                    listaTamanho.push(tamanhoPizza)
-                    listaPreco.push(valorPizza)
-                    console.table(listaNomePizza)
-                    console.table(listaTamanho)
-                    console.table(listaPreco)
+                    var pizza1 = []
+                    
+                    pizza1[0] = nomePizza
+                    pizza1[1] = tamanhoPizza
+                    pizza1[2] = valorPizza
+                    listaPizzas.push(pizza1)
+                    
+                    console.table(pizza1)
+                    console.log(listaPizzas);
                 }
                 // efetua o calculo de area
                 function execCalculoArea() {
-                    listaAreas = []
-                    for (var i = 0; i < listaTamanho.length; i++) {
-                        let area = listaTamanho[i] * Math.PI
-                        listaAreas.push(area.toFixed(2))
-                        console.table(listaAreas)
-                    }
+                    listaPizzas.forEach(pizza1 => {
+                    let raio = pizza1[1] / 2
+                    let area = Math.PI * (raio * raio)
+                    pizza1.push(area)
+                    console.log(area)
+                    console.log(listaPizzas);
+
+                    
+                });
                 }
-                // utiliza a area para definir o valor por centimeto²
+                // utiliza a area para definir o valor por centimetro²
                 function calcularPrecoPorCm2() {
-                    listaPrecoCm2 = []
-                    for (var i = 0; i < listaPreco.length; i++) {
-                        let precoPorCm2 = listaPreco[i] / listaAreas[i]
-                        listaPrecoCm2.push(precoPorCm2.toFixed(2))
-                        console.table(listaPrecoCm2)
-                    }
+                    listaPizzas.forEach(pizza1 => {
+                    let precoRel = pizza1[2] / pizza1[3]
+                    pizza1.push(precoRel)
+                    console.log(precoRel);
+                    console.log(listaPizzas);
+                    
+                });
+                    
                 }
+
                 // Calcula o custo beneficio com relacao ao valor de cada pizza
                 function calcularDiferença() {
-                    listadiferanca = []
-                    // organiza do melhor Cb para o pior CB
-                    let isTrueOrFalse = true
-                        while (isTrueOrFalse) {
-                            isTrueOrFalse = false
-                            for (var i = 0; i < listaPrecoCm2.length; i++) {
-                                if (listaPrecoCm2[i] > listaPrecoCm2[i + 1]) {
-                                    isTrueOrFalse = true
-                                    let aux1 = listaPrecoCm2[i]
-                                    listaPrecoCm2[i] = listaPrecoCm2[i + 1]
-                                    listaPrecoCm2[i + 1] = aux1
-    
-                                    let aux2 = listaNomePizza[i]
-                                    listaNomePizza[i] = listaNomePizza[i + 1]
-                                    listaNomePizza[i + 1] = aux2
-                                    
-                                    let aux3 = listaTamanho[i]
-                                    listaTamanho[i] = listaTamanho[i + 1]
-                                    listaTamanho[i + 1] = aux3
-    
-                                    let aux4 = listaPreco[i]
-                                    listaPreco[i] = listaPreco[i + 1]
-                                    listaPreco[i + 1] = aux4
+                    listaPizzas = listaPizzas.sort(function (a, b) {
+                            if (a[4] > b[4]) {
+                            return 1
+                    }
+                            if (a[4] < b[4]) {
+                             return -1
+                    }
+                             return 0
+                    })
+                    console.table(listaPizzas)
+                }
 
-                                    
-                                }
-                            }
-                        }
-                        // Calculando a diferença entre os preços por cm2 , transforma em %
-                        listadiferanca.push("MelhorCB")
-                        for (var i = 0; i < listaPrecoCm2.length - 1; i++) {
-                            let diferença = (((listaPrecoCm2[i + 1] * 100) / listaPrecoCm2[i]) - 100).toFixed(1)
-                            listadiferanca.push("+" + diferença + "%")
+
+                    /*  
+                // Calculando a diferença entre os preços por cm2 , transforma em %
+                    listadiferanca.push("MelhorCB")
+                    for (var i = 0; i < listaPrecoCm2.length - 1; i++) {
+                        let diferença = (((listaPrecoCm2[i + 1] * 100) / listaPrecoCm2[i]) - 100).toFixed(1)
+                        listadiferanca.push("+" + diferença + "%")
                         }
                         console.table(listadiferanca)
                 }
@@ -292,14 +281,15 @@
                     saidaPreco.value
                     saidaPrecoCm2.value
                     saidaDiferenca.value
-                    for (var i = 0; i < listaNomePizza.length; i++) {
-                        saidaNome.value = saidaNome.value + listaNomePizza[i] + " "
+                    for (var i = 0; i < listaPizzas.length; i++) {
+                        saidaNome.value = saidaNome.value + listaPizzas[i] + " "
                         saidaTamanho.value = saidaTamanho.value + listaTamanho[i] + " "
                         saidaPreco.value = saidaPreco.value + "R$" + listaPreco[i] + " "
                         saidaPrecoCm2.value = saidaPrecoCm2.value +  "R$" + listaPrecoCm2[i] + " "
                         saidaDiferenca.value = saidaDiferenca.value + listadiferanca[i] + " "
                     }
-                
+                }*/
+                /*
                 //Criar nova linha para a tabela 
                 var usuarioTr = montaTr()
 
@@ -331,7 +321,7 @@
                 // Limpa os campos da tela apos cada cadastro, deixando a tela limpa para o proximo valor
                 
                 }
-
+                */
                 function limpartela() {
                     document.querySelector("#idNomePizza").value = ""
                     document.querySelector("#idTamanho").value = ""
