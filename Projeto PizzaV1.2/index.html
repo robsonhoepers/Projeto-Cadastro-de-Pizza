@@ -235,7 +235,7 @@
                 // utiliza a area para definir o valor por centimetro²
                 function calcularPrecoPorCm2() {
                     listaPizzas.forEach(pizza1 => {
-                    let precoRel = pizza1[2] / pizza1[3]
+                    let precoRel = (pizza1[2] / pizza1[3]).toFixed(3)
                     pizza1.push(precoRel)
                     console.log(precoRel);
                     console.log(listaPizzas);
@@ -245,7 +245,15 @@
                 }
 
                 // Calcula o custo beneficio com relacao ao valor de cada pizza
-                function calcularDiferença() {
+                // Calculando a diferença entre os preços por cm2 , transforma em %
+                function calcularDiferença() {  
+                                                                     
+                     /*        
+                    listaPizzas.forEach(listaPizzas =>{
+                        let diferenca = (((pizza1[i,4]*100) / pizza1[4]) - 100)
+                        pizza1.push("+" + diferenca + "%")
+                    })*/
+                    
                     listaPizzas = listaPizzas.sort(function (a, b) {
                             if (a[4] > b[4]) {
                             return 1
@@ -255,43 +263,27 @@
                     }
                              return 0
                     })
+                    
+
+
+
                     console.table(listaPizzas)
-                }
-
-
-                    /*  
-                // Calculando a diferença entre os preços por cm2 , transforma em %
-                    listadiferanca.push("MelhorCB")
-                    for (var i = 0; i < listaPrecoCm2.length - 1; i++) {
-                        let diferença = (((listaPrecoCm2[i + 1] * 100) / listaPrecoCm2[i]) - 100).toFixed(1)
-                        listadiferanca.push("+" + diferença + "%")
-                        }
-                        console.table(listadiferanca)
-                }
+                    }
                 // mostra todos os valores na tela, de acordo com o q foi executado
                 function mostrasNaTela() {
-                    var saidaNome 
-                    var saidaTamanho 
-                    var saidaPreco
-                    var saidaPrecoCm2
-                    var saidaDiferenca
+                    listaPizzas.forEach(pizza1 =>{
+                        let saidaNomePizza = [0]
+                        let saidatamanhoPizza = [1]
+                        let saidaPrecoPizza = [2]
+                        let saidaPrecoCm2 = [4]
 
-                    saidaNome.value 
-                    saidaTamanho.value
-                    saidaPreco.value
-                    saidaPrecoCm2.value
-                    saidaDiferenca.value
-                    for (var i = 0; i < listaPizzas.length; i++) {
-                        saidaNome.value = saidaNome.value + listaPizzas[i] + " "
-                        saidaTamanho.value = saidaTamanho.value + listaTamanho[i] + " "
-                        saidaPreco.value = saidaPreco.value + "R$" + listaPreco[i] + " "
-                        saidaPrecoCm2.value = saidaPrecoCm2.value +  "R$" + listaPrecoCm2[i] + " "
-                        saidaDiferenca.value = saidaDiferenca.value + listadiferanca[i] + " "
-                    }
-                }*/
-                /*
+
+                    })
+                    
+                }
+               
                 //Criar nova linha para a tabela 
-                var usuarioTr = montaTr()
+                var tablePizzaTr = montaTr()
 
                 //Adicionar a linha na tabela 
                 var tBody = document.getElementById("tboIdLinha")
@@ -299,34 +291,35 @@
 
                 //Cria uma linha (um tr)
                 function montaTr(){
-                    let usuarioTr = document.createElement("tr")
+                    let tablePizzaTr = document.createElement("tr")
                 
-                    usuarioTr.classList.add("trClUsuarioData")
-                    usuarioTr.appendChild(montaTd(saidaNome.value, "tdClNomePizza")) 
-                    usuarioTr.appendChild(montaTd(saidaTamanho.value, "tdClTamanho"))   
-                    usuarioTr.appendChild(montaTd(saidaPreco.value, "tdClPreco"))   
-                    usuarioTr.appendChild(montaTd(saidaPrecoCm2.value, "tdClPrecoCm2"))   
-                    usuarioTr.appendChild(montaTd(saidaDiferenca.value, "tdClDiferenca"))
-                    return usuarioTr
+                    tablePizzaTr.classList.add("trClUsuarioData")
+                    tablePizzaTr.appendChild(montaTd(saidaNomePizza[0].value, "tdClNomePizza")) 
+                    tablePizzaTr.appendChild(montaTd(saidatamanhoPizza[1].value, "tdClTamanho"))   
+                    tablePizzaTr.appendChild(montaTd(saidaPrecoPizza[2].value, "tdClPreco"))   
+                    tablePizzaTr.appendChild(montaTd(saidaPrecoCm2[4].value, "tdClPrecoCm2"))   
+                    //tablePizzaTr.appendChild(montaTd(saidaDiferenca.value, "tdClDiferenca"))
+                    return tablePizzaTr
                 }
 
                 //Cria uma coluna (um td)
                 function montaTd(dado, classe) {
-                    let usuarioTd = document.createElement("td")
-                    usuarioTd.textContent = dado
-                    usuarioTd.classList.add(classe)
+                    let tablePizzaTd = document.createElement("td")
+                    tablePizzaTd.textContent = dado
+                    tablePizzaTd.classList.add(classe)
                     
-                    return usuarioTd
+                    return tablePizzaTd
                 }    
                 // Limpa os campos da tela apos cada cadastro, deixando a tela limpa para o proximo valor
                 
-                }
-                */
+                
+                
                 function limpartela() {
                     document.querySelector("#idNomePizza").value = ""
                     document.querySelector("#idTamanho").value = ""
                     document.querySelector("#idValorPizza").value = ""
                     document.querySelector("#idAlerta").value = ""
+                    document.querySelector("#idNomePizza").focus()
                 }
                 </script>
             
