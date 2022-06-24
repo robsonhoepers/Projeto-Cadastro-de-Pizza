@@ -189,7 +189,7 @@
                     execCalculoArea()
                     calcularPrecoPorCm2()
                     calcularDiferença()
-                    //mostrasNaTela()
+                    /mostrasNaTela()
                 }
                 // valida a tela, verificando se tem algum valor digitado
                 function validarTela() {
@@ -248,11 +248,12 @@
                 // Calculando a diferença entre os preços por cm2 , transforma em %
                 function calcularDiferença() {  
                                                                      
-                     /*        
-                    listaPizzas.forEach(listaPizzas =>{
-                        let diferenca = (((pizza1[i,4]*100) / pizza1[4]) - 100)
+                            
+                    listaPizzas.forEach(pizza1 =>{
+                        let diferenca= ( 1 - ( pizza1[4] / pizza1[4 - 1] ) ) * -100
                         pizza1.push("+" + diferenca + "%")
-                    })*/
+                    })
+                        
                     
                     listaPizzas = listaPizzas.sort(function (a, b) {
                             if (a[4] > b[4]) {
@@ -263,45 +264,50 @@
                     }
                              return 0
                     })
-                    
-
-
-
                     console.table(listaPizzas)
-                    }
+                }
+                  
+                    
                 // mostra todos os valores na tela, de acordo com o q foi executado
                 function mostrasNaTela() {
-                    listaPizzas.forEach(pizza1 =>{
-                        let saidaNomePizza = [0]
-                        let saidatamanhoPizza = [1]
-                        let saidaPrecoPizza = [2]
-                        let saidaPrecoCm2 = [4]
-
-
-                    })
-                    
-                }
+                //Extrair dados do formulario 
+                //var pizza = extrairpizza()    
+                
                
                 //Criar nova linha para a tabela 
                 var tablePizzaTr = montaTr()
 
                 //Adicionar a linha na tabela 
                 var tBody = document.getElementById("tboIdLinha")
-                tBody.appendChild(usuarioTr)
-
+                tBody.appendChild(tablePizzaTr)
+               
+                
+                function extrairpizza() {
+                     for (let i = 0; i < listaPizzas.length; i++) {
+                        let pizza = listaPizzas[i];
+                            
+                    }
+                             
+                   
+                    return pizza
+                }
+             
+                }
                 //Cria uma linha (um tr)
-                function montaTr(){
-                    let tablePizzaTr = document.createElement("tr")
+                function montaTr(pizza){
+                    for (let i = 0; i < listaPizzas.length; i++) {
+                        let pizza = listaPizzas[i];
+                        let tablePizzaTr = document.createElement("tr")
                 
                     tablePizzaTr.classList.add("trClUsuarioData")
-                    tablePizzaTr.appendChild(montaTd(saidaNomePizza[0].value, "tdClNomePizza")) 
-                    tablePizzaTr.appendChild(montaTd(saidatamanhoPizza[1].value, "tdClTamanho"))   
-                    tablePizzaTr.appendChild(montaTd(saidaPrecoPizza[2].value, "tdClPreco"))   
-                    tablePizzaTr.appendChild(montaTd(saidaPrecoCm2[4].value, "tdClPrecoCm2"))   
-                    //tablePizzaTr.appendChild(montaTd(saidaDiferenca.value, "tdClDiferenca"))
+                    tablePizzaTr.appendChild(montaTd(pizza[0], "tdClNomePizza")) 
+                    tablePizzaTr.appendChild(montaTd(pizza[1], "tdClTamanho"))   
+                    tablePizzaTr.appendChild(montaTd(pizza[2], "tdClPreco"))   
+                    tablePizzaTr.appendChild(montaTd(pizza[4], "tdClPrecoCm2"))   
+                    tablePizzaTr.appendChild(montaTd(pizza[5], "tdClDiferenca"))
                     return tablePizzaTr
                 }
-
+            }
                 //Cria uma coluna (um td)
                 function montaTd(dado, classe) {
                     let tablePizzaTd = document.createElement("td")
@@ -310,9 +316,8 @@
                     
                     return tablePizzaTd
                 }    
+                
                 // Limpa os campos da tela apos cada cadastro, deixando a tela limpa para o proximo valor
-                
-                
                 
                 function limpartela() {
                     document.querySelector("#idNomePizza").value = ""
